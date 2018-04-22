@@ -28,6 +28,19 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
+		Categoria obj = service.fromDTO(objDto);
+		obj = service.insert(obj);
+		
+		// Toda inclusao deve ser feito a configuracao do LOCATION na tab HEADERS do Postman
+		// Abaixo como fazer isso
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		List<Categoria> list = service.findAll();
@@ -42,18 +55,7 @@ public class CategoriaResource {
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
-		Categoria obj = service.fromDTO(objDto);
-		obj = service.insert(obj);
-		
-		// Toda inclusao deve ser feito a configuracao do LOCATION na tab HEADERS do Postman
-		// Abaixo como fazer isso
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
-	}
+
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
