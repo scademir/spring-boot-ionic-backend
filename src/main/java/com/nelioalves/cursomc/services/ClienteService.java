@@ -16,7 +16,6 @@ import com.nelioalves.cursomc.domain.Endereco;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 import com.nelioalves.cursomc.dto.ClienteDTO;
 import com.nelioalves.cursomc.dto.ClienteNewDTO;
-import com.nelioalves.cursomc.repositories.CidadeRepository;
 import com.nelioalves.cursomc.repositories.ClienteRepository;
 import com.nelioalves.cursomc.repositories.EnderecoRepository;
 import com.nelioalves.cursomc.services.exceptions.DataIntegrityException;
@@ -31,8 +30,8 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-	@Autowired
-	private CidadeRepository cidadeRepository;
+//	@Autowired
+//	private CidadeRepository cidadeRepository;
 	
 	
 	public Cliente find(Integer id) {
@@ -65,7 +64,7 @@ public class ClienteService {
 		try {
 			repo.delete(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possivel excluir porque há entidades relacionadas.");
+			throw new DataIntegrityException("Não é possivel excluir porque há pedidos relacionados.");
 		}
 	}
 	
