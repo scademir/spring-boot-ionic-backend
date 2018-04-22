@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.nelioalves.cursomc.domain.Categoria;
 
-public class CategoriaDTO  implements Serializable {
+public class CategoriaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 
