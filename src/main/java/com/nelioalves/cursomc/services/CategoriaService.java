@@ -37,8 +37,9 @@ public class CategoriaService {
 
 	
 	public Categoria update(Categoria obj) {
-		this.find(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = this.find(obj.getId());  // Recupera o atributos como estão no banco de dados
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -61,5 +62,10 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria(objDto.getId(),objDto.getNome());
+	}
+	
+	// private pq é um metodo auxiliar da classe e não tem motivo de ficar exposto para fora da classe
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 }
