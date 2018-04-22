@@ -21,5 +21,10 @@ public class CategoriaService {
 		}
 		return obj;
 	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null); // para forcar a ser um novo recurso, pois o id será criado
+		return repo.save(obj);
+	}
 
 }
