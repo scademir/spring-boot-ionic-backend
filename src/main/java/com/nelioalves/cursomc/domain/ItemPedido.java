@@ -41,8 +41,20 @@ public class ItemPedido implements Serializable {
 		return id.getPedido();
 	}
 	
+	// Para associar o Pedido que esta sendo associado ao ItemPedido
+
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
+	
 	public Produto getProduto() {
 		return id.getProduto();
+	}
+
+	// Para associar o Produto que esta sendo associado ao ItemPedido
+	// Sem esse SET somente via construtor, MAS o framework não usa o construtor somente o método SET
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
 	}
 	
 	public ItemPedidoPK getId() {
